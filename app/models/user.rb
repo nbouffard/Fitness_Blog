@@ -7,5 +7,5 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :username, presence: true
   validates :username, uniqueness: true
 
-  has_many :posts, depenent: :destroy
+  has_many :posts, dependent: :destroy
 end
