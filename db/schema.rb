@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_14_103003) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_14_144753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_14_103003) do
     t.index ["user_id"], name: "index_social_media_on_user_id"
   end
 
+  create_table "socials", force: :cascade do |t|
+    t.string "link"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_socials_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.bigint "post_id", null: false
     t.string "tag_name"
@@ -77,5 +85,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_14_103003) do
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "social_media", "users"
+  add_foreign_key "socials", "users"
   add_foreign_key "tags", "posts"
 end
