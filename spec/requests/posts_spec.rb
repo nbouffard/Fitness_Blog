@@ -1,15 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
-  # let(:user) { FactoryBot.create(:user, username: Faker::Internet.username) }
-  # let(:category) { FactoryBot.create(:category) }
-  # let(:post) { FactoryBot.create(:post, user_id: user.id, category_id: category.id) }
+  let(:user) { FactoryBot.create(:user, username: Faker::Internet.username) }
+  let(:category) { FactoryBot.create(:category) }
+  let(:post) { FactoryBot.create(:post, user_id: user.id, category_id: category.id) }
   # before do
   # end
   it 'GET /index' do
     get posts_path
     expect(response).to be_successful
     expect(response.body).to include('Posts')
+  end
+
+  it 'GET /show' do
+    # post = create(:post)
+    get post_path(post)
+    expect(response).to be_successful
   end
 
   it 'GET /new' do
