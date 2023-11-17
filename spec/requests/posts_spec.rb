@@ -64,10 +64,16 @@ RSpec.describe 'Posts', type: :request do
   end
 
 
-
-  it 'GET /edit'
-
-
+  describe 'GET /edit'
+    context 'Being the post author' do
+      it 'GET /edit' do
+        user = FactoryBot.create(:user)
+        login_as(user, scope: :user)
+        post = create(:post, user_id: user.id)
+        get edit_post_path(post)
+        expect(response).to be_successful
+      end
+    end
 
   it 'PATCH /update'
 
