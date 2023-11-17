@@ -14,8 +14,8 @@ RSpec.describe Post, type: :model do
     post = build(:post, content: '')
     expect(post).to_not be_valid
   end
-  it 'Content should not be less than 1500 characters' do
-    post = build(:post, content: Faker::Lorem.characters(number: 1000))
+  it 'Content should not be less than 15 characters' do
+    post = build(:post, content: Faker::Lorem.characters(number: 10))
     expect(post).to_not be_valid
   end
 end
