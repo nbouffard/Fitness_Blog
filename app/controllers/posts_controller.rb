@@ -29,6 +29,17 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def update
+    @post = Post.find(params[:id])
+    if @post.user_id == current_user.id
+      if @post.update(post_params)
+        redirect_to post_path(@post), status: :accepted
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+  end
+
   private
 
   def post_params
