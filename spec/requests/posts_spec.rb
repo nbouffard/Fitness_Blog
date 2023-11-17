@@ -63,10 +63,9 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-
-  describe 'GET /edit'
+  describe 'GET /edit' do
     context 'Being the post author' do
-      it 'GET /edit' do
+      it 'Should render edit form' do
         user = FactoryBot.create(:user)
         login_as(user, scope: :user)
         post = create(:post, user_id: user.id)
@@ -74,8 +73,41 @@ RSpec.describe 'Posts', type: :request do
         expect(response).to be_successful
       end
     end
+  end
 
-  it 'PATCH /update'
+  describe 'PATCH /update' do
+    context 'With valid user' do
+      it 'Should update post' do
+        user = FactoryBot.create(:user)
+        login_as(user, scope: :user)
+        post = create(:post, user_id: user.id)
+        valid_params = {
+          post: {
+            title: 'title',
+            content: Faker::Lorem.characters(number: 1550),
+            category: 'one'
+          }
+        }
+        patch post_path(post), params: valid_params
+        expect(response).to have_http_status(:accepted)
+      end
+    end
+    # context 'Without valid user' do
+    #   it 'Should not update post if not the author' do
+    #     user = FactoryBot.create(:user)
+    #     login_as(user, scope: :user)
+    #     post = create(:post)
+    #     valid_params = {
+    #       post: {
+    #         title: 'title',
+    #         content: Faker::Lorem.characters(number: 1550),
+    #         category: 'one'
+    #       }
+    #     }
+    #   end
+    # end
+  end
+
 
 
 
