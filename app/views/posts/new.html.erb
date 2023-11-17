@@ -1,7 +1,2 @@
 <h1>New Post</h1>
-<%= form_for @post do |f| %>
-  <%= f.text_field :title %>
-  <%= f.text_field :content %>
-  <%= f.select :category, ['one', 'two', 'three'] %>
-  <%= f.submit 'Create Post' %>
-<% end %>
+<%= render partial: 'form', locals: { post: @post} %>
