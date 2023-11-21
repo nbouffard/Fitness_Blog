@@ -19,7 +19,7 @@ RSpec.describe 'Posts', type: :request do
   end
 
   it 'GET /new' do
-    user = FactoryBot.create(:user)
+    user = create(:user)
     login_as(user, scope: :user)
     get new_post_path
     expect(response).to be_successful
@@ -29,7 +29,7 @@ RSpec.describe 'Posts', type: :request do
   describe 'POST /create' do
     context 'With valid parameters' do
       it 'Creates a new post' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         login_as(user, scope: :user)
         post_params = {
           post: {
@@ -46,7 +46,7 @@ RSpec.describe 'Posts', type: :request do
     end
     context 'Without valid parameters' do
       it 'Should not create a new post' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         login_as(user, scope: :user)
         invalid_params = {
           post: {
@@ -66,7 +66,7 @@ RSpec.describe 'Posts', type: :request do
   describe 'GET /edit' do
     context 'Being the post author' do
       it 'Should render edit form' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         login_as(user, scope: :user)
         post = create(:post, user_id: user.id)
         get edit_post_path(post)
@@ -78,7 +78,7 @@ RSpec.describe 'Posts', type: :request do
   describe 'PATCH /update' do
     context 'With valid user' do
       it 'Should update post' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         login_as(user, scope: :user)
         post = create(:post, user_id: user.id)
         valid_params = {
@@ -92,26 +92,17 @@ RSpec.describe 'Posts', type: :request do
         expect(response).to have_http_status(:accepted)
       end
     end
-    # context 'Without valid user' do
-    #   it 'Should not update post if not the author' do
-    #     user = FactoryBot.create(:user)
-    #     login_as(user, scope: :user)
-    #     post = create(:post)
-    #     valid_params = {
-    #       post: {
-    #         title: 'title',
-    #         content: Faker::Lorem.characters(number: 1550),
-    #         category: 'one'
-    #       }
-    #     }
-    #   end
-    # end
   end
 
-
-
-
-  it 'DELETE /destroy'
-
-
+  describe 'DELETE /destroy' do
+    context 'With valid user credentials' do
+      it 'Should delete post' do
+        user = create(:user)
+        login_as(user, scope: :user)
+        post = create(:post, user_id: user.id)
+        delete post_path(post)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end
