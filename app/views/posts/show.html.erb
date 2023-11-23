@@ -1,4 +1,11 @@
 <h1>Show</h1>
 <%= link_to 'home', root_path %>
-<p><%= @post.title %></p>
+<% if policy(@post).edit? %>
+<%= link_to 'Edit post', edit_post_path(@post) %>
+<% end %>
+<p><%= @post.category %></p>
+<h2><%= @post.title %></h2>
 <p><%= @post.content %></p>
+<%= @post.user.username %>
+<br>
+<%= @post.created_at %>
