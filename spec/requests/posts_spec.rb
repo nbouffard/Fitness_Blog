@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Posts', type: :request do
   let(:user) { FactoryBot.create(:user, username: Faker::Internet.username) }
   # let(:category) { FactoryBot.create(:category) }
-  let(:blog_post) { FactoryBot.create(:post, user_id: user.id, category: 'one') }
+  let(:blog_post) { FactoryBot.create(:post, user_id: user.id, category: 'Fitness') }
   # before do
   # end
   it 'GET /index' do
@@ -33,9 +33,9 @@ RSpec.describe 'Posts', type: :request do
         login_as(user, scope: :user)
         post_params = {
           post: {
-            title: 'title',
+            title: 'my title',
             content: Faker::Lorem.characters(number: 1550),
-            category: 'one'
+            category: 'Fitness'
           }
         }
         expect {
@@ -52,7 +52,7 @@ RSpec.describe 'Posts', type: :request do
           post: {
             title: '',
             content: Faker::Lorem.characters(number: 50),
-            category: 'one'
+            category: 'Fitness'
           }
         }
         expect {
@@ -85,7 +85,7 @@ RSpec.describe 'Posts', type: :request do
           post: {
             title: 'title',
             content: Faker::Lorem.characters(number: 1550),
-            category: 'one'
+            category: 'Fitness'
           }
         }
         patch post_path(post), params: valid_params
