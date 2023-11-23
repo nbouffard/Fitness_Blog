@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   # accepts_nested_attributes_for :tags, reject_if: :all_blank
 
-  CATEGORIES = ['one', 'two', 'three']
+  CATEGORIES = %w[Health Fitness Nutrition Beauty Other]
   validates :title, presence: true, length: { maximum: 60 }
   validates :content, presence: true, length: { minimum: 15 }
   validates :category, presence: true

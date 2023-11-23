@@ -1,6 +1,6 @@
 <%= form_for post do |f| %>
   <%= f.text_field :title %>
   <%= f.text_field :content %>
-  <%= f.select :category, ['one', 'two', 'three'] %>
+  <%= f.select :category, Post::CATEGORIES %>
   <%= f.submit 'Create Post' %>
 <% end %>
