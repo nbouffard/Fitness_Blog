@@ -1,6 +1,22 @@
-<%= form_for post do |f| %>
-  <%= f.text_field :title %>
-  <%= f.text_field :content %>
-  <%= f.select :category, Post::CATEGORIES %>
-  <%= f.submit 'Create Post' %>
-<% end %>
+<div>
+  <%= form_for post do |f| %>
+    <div>
+      <%= f.label :title, 'Title' %>
+      <br>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.label :content, 'Content' %>
+      <br>
+      <%= f.text_area :content, size: '80x30' %>
+    </div>
+    <div>
+      <%= f.label :category, 'Pick a category' %>
+      <br>
+      <%= f.select :category, Post::CATEGORIES %>
+    </div>
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
